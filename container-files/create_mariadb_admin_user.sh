@@ -14,29 +14,39 @@ done
 PASS=${MARIADB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MARIADB_PASS} ] && echo "preset" || echo "random" )
 
-echo "=> Importing example database 'world'"
-unzip world.sql.zip
-mysql -uroot -e "CREATE DATABASE world"
-mysql -uroot world < world.sql
+echo "Checking for databases to import from environment variables INSTALL_<DB_NAME>";
 
-echo "=> Importing example database 'world_innodb'"
-unzip world_innodb.sql.zip
-mysql -uroot -e "CREATE DATABASE world_innodb"
-mysql -uroot world_innodb < world_innodb.sql
+if [ -n "$INSTALL_WORLD" ]; then
+    echo "=> Importing example database 'world'"
+    unzip world.sql.zip
+    mysql -uroot -e "CREATE DATABASE world"
+    mysql -uroot world < world.sql
+fi
 
-echo "=> Importing example database 'sakila'"
-unzip sakila-db.zip
-mysql -uroot -e "CREATE DATABASE sakila"
-mysql -uroot sakila < sakila-db/sakila-schema.sql
-mysql -uroot sakila < sakila-db/sakila-data.sql
+if [ -n "$INSTALL_WORLD_INNODB" ]; then
+    echo "=> Importing example database 'world_innodb'"
+    unzip world_innodb.sql.zip
+    mysql -uroot -e "CREATE DATABASE world_innodb"
+    mysql -uroot world_innodb < world_innodb.sql
+fi
 
-echo "=> Importing example database 'employees'"
-bunzip2 employees_db-full-1.0.6.tar.bz2
-tar -xf employees_db-full-1.0.6.tar
-mysql -uroot -e "CREATE DATABASE employees"
-pushd employees_db
-    mysql -uroot employees < employees.sql
-popd
+if [ -n "$INSTALL_SAKILA" ]; then
+    echo "=> Importing example database 'sakila'"
+    unzip sakila-db.zip
+    mysql -uroot -e "CREATE DATABASE sakila"
+    mysql -uroot sakila < sakila-db/sakila-schema.sql
+    mysql -uroot sakila < sakila-db/sakila-data.sql
+fi
+
+if [ -n "$INSTALL_EMPLOYEES" ]; then
+    echo "=> Importing example database 'employees'"
+    bunzip2 employees_db-full-1.0.6.tar.bz2
+    tar -xf employees_db-full-1.0.6.tar
+    mysql -uroot -e "CREATE DATABASE employees"
+    pushd employees_db
+        mysql -uroot employees < employees.sql
+    popd
+fi
 
 echo "=> Creating MariaDB admin user with ${_word} password"
 mysql -uroot -e "CREATE USER 'admin'@'%' IDENTIFIED BY '$PASS'"
