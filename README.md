@@ -27,6 +27,11 @@ Set environment `-e ...` variable to setup database schema and data on startup
 
 ### Links
 
-- https://github.com/tutumcloud/mariadb
-- http://dev.mysql.com/doc/index-other.html
-- https://github.com/schmunk42/docker-mariadb-example-databases
+- [GitHub source-code](https://github.com/schmunk42/docker-mariadb-example-databases)
+- [Docker Hub images](https://hub.docker.com/r/schmunk42/mariadb-example-databases/)
+- [Base image from tutum](https://github.com/tutumcloud/mariadb)
+- [Data from MySQL](http://dev.mysql.com/doc/index-other.html)
+
+---
+
+*Build by [*dmstr](http://diemeisterei.de), Stuttgart*
