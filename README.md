@@ -34,4 +34,4 @@ Set environment `-e ...` variable to setup database schema and data on startup
 
 ---
 
-*Built by [*dmstr](http://diemeisterei.de), Stuttgart*
+*Built by [*dmstr](http://diemeisterei.de) | Stuttgart :de:*
