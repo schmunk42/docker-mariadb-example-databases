@@ -1,0 +1,11 @@
+version: '2'
+services:
+  mariadb:
+    build: .
+    ports:
+      - '3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=secretadmin
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secretadmin
+      - INSTALL_SAKILA=1

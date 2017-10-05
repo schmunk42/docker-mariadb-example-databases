@@ -1,4 +1,4 @@
-FROM tutum/mariadb:10.1
+FROM mariadb:10.3
 
 # Install extra system packages
 RUN curl -sL https://deb.nodesource.com/setup | bash - && \
@@ -13,4 +13,4 @@ ADD sql-files/ /sql-files/
 WORKDIR /sql-files
 
 ADD container-files/ /
-RUN chmod 700 /create_mariadb_admin_user.sh
+RUN chmod 700 /init-example-databases.sh

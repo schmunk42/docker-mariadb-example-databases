@@ -3,22 +3,20 @@ MariaDB Docker container with example databases from MySQL
 
 This is image can be used to install demo databases in a MariaDB container on startup.
 
-### Run
+### Configuration
 
-	docker run -d \
-	    -e INSTALL_SAKILA=1 \
-	    -e MARIADB_PASS=secretadmin \
-	    -p 33066:3306 \
-	    schmunk42/mariadb-example-databases
-
-### Configure
-
-Set environment `-e ...` variable to setup database schema and data on startup
+Set environment variables to setup database schema with script, see `docker-compose.yml`
 
 - `INSTALL_WORLD=1`
 - `INSTALL_WORLD_INNODB=1`
 - `INSTALL_SAKILA=1`
 - `INSTALL_EMPLOYEES=1`
+
+### Usage
+
+	docker-compose up -d
+	docker-compose exec mariadb /init-example-databases.sh
+
 
 ### Build
 
@@ -34,4 +32,4 @@ Set environment `-e ...` variable to setup database schema and data on startup
 
 ---
 
-*Built by [*dmstr](http://diemeisterei.de) | Stuttgart :de:*
+*Built by [*dmstr](http://diemeisterei.de)*
